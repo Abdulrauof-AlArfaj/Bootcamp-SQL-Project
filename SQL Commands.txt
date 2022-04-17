@@ -1,0 +1,102 @@
+Section 1:
+
+create database store
+
+create table countries ( code int primary key, name varchar(20), contienent_name varchar(20) )
+
+create table users ( id int primary key, full_name varchar(20), email varchar(20), gender char(1), date_of_birth varchar(15), created_at datetime, country_code int )
+
+create table orders ( id int primary key, status varchar(6), created_at datetime )
+
+create table products ( id int primary key, name varchar(10), price int, status varchar(10), created_at datetime )
+
+create table order_products ( quantity int )
+
+
+Section 2:
+
+alter table users add foreign key (Counrty_code) references countries (code)
+
+alter table orders add column user_id int
+
+alter table orders -- add column user_id int; add foreign key (user_id) references users (id)
+
+alter table order_products add column order_id int
+
+alter table order_products add primary key (order_id);
+
+alter table order_products add column product_id int
+
+alter table order_products add primary key (product_id);
+
+
+
+
+Section 3:
+
+
+alter table countries add unique (name)
+
+alter table countries modify contienent_name varchar(20) not null
+
+alter table users add unique (email)
+
+alter table users add check (gender='m' or gender ='f')
+
+alter table orders add check (status='start' or status ='finish')
+
+alter table order_products alter quantity set default 0
+
+alter table products alter price set default 0
+
+alter table products modify name varchar(20) not null
+
+alter table products add check (status="valid" or  status="expired")
+
+
+
+Section 4:
+
+use store;
+insert into countries (code, name, contienent_name)
+values (20, "Japan","Asia");
+
+---------------------------------------------------
+
+use store;
+insert into users (id, full_name, email, gender, date_of_birth)
+values (1, "Kurosaki Ichigo","Soul@outlook.com", 'm', "1997/11/9");
+
+---------------------------------------------------
+
+use store;
+insert into orders (id, status)
+values (1, "start");
+
+---------------------------------------------------
+
+use store;
+insert into products (id, name, price, status)
+values (1, "Zangetsu", 99, "valid");
+
+---------------------------------------------------
+
+use store;
+insert into order_products (quantity)
+values (1);
+
+---------------------------------------------------
+
+use store;
+update products
+set price = 2000
+where id = 1;
+
+---------------------------------------------------
+
+use store;
+delete from products where id = 1;
+
+
+
+
